@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource_BuildingPermits_Data">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>Data Source=.;Initial Catalog=BuildingPermits_DataWarehouse</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>232538e9-b9e8-42a6-8f68-b06801a126a7</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_BuildingPermits">
+      <Query>
+        <DataSourceName>DataSource_BuildingPermits_Data</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@Construction_Type">
+            <Value>=Parameters!Construction_Type.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select fbp.NumberofExistingStories,fbp.NumberofProposedStories,fbp.RevisedCost, fbp.EstimatedCost,fbp.ProposedUnits,fbp.ExistingUnits,dpt.PermitTypeDefinition,dld.Location,dd.Year,dd.MonthName,dd.Quarter,dd.WeekOfMonth,dd.DayName,
+dct.ConstructionTypeDescription,dba.StreetName,dba.Block
+from [dbo].[FactBuildingPermits] fbp
+inner join [dbo].[DimBuildingAddress] dba on fbp.[BuildingAddressKey] = dba.BuildingAddressSK
+inner join [dbo].[DimConstructionType] dct on fbp.[ProposedConstructionTypeKey] = dct.[ConstructionTypeSK]
+inner join [dbo].[DimDate] dd on  fbp.[PermitCreationDateKey] = dd.[DateKey]
+inner join [dbo].[DimLocationDetailsId] dld on fbp.[LocationDetailsKey]= dld.[LocationDetailsSK]
+inner join [dbo].[DimPermitType] dpt on fbp.[PermitTypeKey]=dpt.[PermitTypeSK]
+where dct.ConstructionTypeDescription in (@Construction_Type)</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="NumberofExistingStories">
+          <DataField>NumberofExistingStories</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NumberofProposedStories">
+          <DataField>NumberofProposedStories</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="RevisedCost">
+          <DataField>RevisedCost</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="EstimatedCost">
+          <DataField>EstimatedCost</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ProposedUnits">
+          <DataField>ProposedUnits</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ExistingUnits">
+          <DataField>ExistingUnits</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PermitTypeDefinition">
+          <DataField>PermitTypeDefinition</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Location">
+          <DataField>Location</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Year">
+          <DataField>Year</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MonthName">
+          <DataField>MonthName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Quarter">
+          <DataField>Quarter</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="WeekOfMonth">
+          <DataField>WeekOfMonth</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DayName">
+          <DataField>DayName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ConstructionTypeDescription">
+          <DataField>ConstructionTypeDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StreetName">
+          <DataField>StreetName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Block">
+          <DataField>Block</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Permit_Types">
+      <Query>
+        <DataSourceName>DataSource_BuildingPermits_Data</DataSourceName>
+        <CommandText>select [PermitTypeSK], [AlternatePermitTypeId],[PermitTypeDefinition]
+from [dbo].[DimPermitType]</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="PermitTypeSK">
+          <DataField>PermitTypeSK</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AlternatePermitTypeId">
+          <DataField>AlternatePermitTypeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PermitTypeDefinition">
+          <DataField>PermitTypeDefinition</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Construction_Type">
+      <Query>
+        <DataSourceName>DataSource_BuildingPermits_Data</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@Permit_Type">
+            <Value>=Parameters!Permit_Type.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select [ConstructionTypeSK], [AlternateConstructionTypeId],[ConstructionTypeDescription],[PermitTypeKey]
+from [dbo].[DimConstructionType],[dbo].[FactBuildingPermits]
+where [PermitTypeKey] in (@Permit_Type)</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="ConstructionTypeSK">
+          <DataField>ConstructionTypeSK</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AlternateConstructionTypeId">
+          <DataField>AlternateConstructionTypeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ConstructionTypeDescription">
+          <DataField>ConstructionTypeDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PermitTypeKey">
+          <DataField>PermitTypeKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="ReportTitle">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Construction-wise YOY report</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>28pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
+            <rd:DefaultName>ReportTitle</rd:DefaultName>
+            <Height>0.5in</Height>
+            <Width>5.5in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>2.25in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Body>
+      <Width>6.49999in</Width>
+      <Page>
+        <PageFooter>
+          <Height>0.45in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="ExecutionTime">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ExecutionTime</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+              <Top>0.2in</Top>
+              <Left>4in</Left>
+              <Height>0.25in</Height>
+              <Width>2in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="Permit_Type">
+      <DataType>String</DataType>
+      <Prompt>Permit Type</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Permit_Types</DataSetName>
+          <ValueField>PermitTypeSK</ValueField>
+          <LabelField>PermitTypeDefinition</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Construction_Type">
+      <DataType>String</DataType>
+      <Prompt>Construction Type</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Construction_Type</DataSetName>
+          <ValueField>ConstructionTypeDescription</ValueField>
+          <LabelField>ConstructionTypeDescription</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Permit_Type</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Construction_Type</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>a3405f03-12f5-4199-970c-4a21be36005d</rd:ReportID>
+</Report>

@@ -1,0 +1,9 @@
+PermitTypeId,PermitTypeDefinition
+PT000001,new construction
+PT000002,new construction wood frame
+PT000003,additions alterations or repairs
+PT000004,sign - erect
+PT000005,grade or quarry or fill or excavate
+PT000006,demolitions
+PT000007,wall or painted sign
+PT000008,otc alterations permit

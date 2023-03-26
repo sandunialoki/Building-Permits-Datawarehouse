@@ -1,0 +1,89 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>BuildingPermits_SSAS</Database>
+    <Server>localhost</Server>
+    <ConnectionString>Data Source=localhost;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>false</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>eVmlfv0TjXL69QZfTA5OGra/G6I=6/7/2021 9:41:05 AM6/6/2021 8:11:13 PM</TimeStamp>
+        <ID>
+          <String>DS_Building Permits Data Warehouse</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>M1N3HrXRRPhEE0xZ4TQO3U0aGFw=6/6/2021 10:18:25 PM6/6/2021 9:08:44 PM</TimeStamp>
+        <ID>
+          <String>DSV_Building Permits Data Warehouse</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>D51j+ZUPOLk49gS8V3hiONISfsA=6/10/2021 7:27:44 PM6/6/2021 10:47:47 PM</TimeStamp>
+        <ID>
+          <String>Dim Permit Type</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>2rSCJLxDZ9xX6zk7qVzBWDCOqiU=6/16/2021 7:09:09 PM6/6/2021 10:47:47 PM</TimeStamp>
+        <ID>
+          <String>Dim Building Address</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>IWWcWlM+fASE+ovDeM0YjijSff4=6/16/2021 7:14:43 PM6/6/2021 10:47:47 PM</TimeStamp>
+        <ID>
+          <String>Dim Date</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>mx8DYMatfrLzE/M1sv9IDruNjjM=6/16/2021 7:10:17 PM6/6/2021 10:47:47 PM</TimeStamp>
+        <ID>
+          <String>Dim Location Details Id</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>VWQx05kXYp6L9A7qWgxdCC9aQG8=6/10/2021 3:53:39 PM6/6/2021 10:47:47 PM</TimeStamp>
+        <ID>
+          <String>Dim Construction Type</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>96HCRWa+/qm95RE3kWfW+f9EAxI=6/16/2021 10:52:15 PM6/6/2021 10:47:46 PMZaj4f51Gch4d5TI+5sI7xbS17m8=6/6/2021 10:47:48 PM6/6/2021 10:47:47 PM</TimeStamp>
+        <ID>
+          <String>Cube_Building Permits</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>Yn3oYx0aE7sOlBa1e3dPEAdI7B0=6/6/2021 5:37:13 PM6/6/2021 5:37:13 PM</TimeStamp>
+      <ID>
+        <String>BuildingPermits_SSAS</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2021-06-16T17:23:56.72Z</LastDeployed>
+</DeploymentSnapshot>
